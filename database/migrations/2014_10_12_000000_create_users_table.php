@@ -15,7 +15,10 @@ return new class extends Migration {
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
+            $table->string('national_id');
+            $table->date('date_of_birth');
             $table->string('email')->unique();
+            $table->string('phone_number')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->tinyInteger('type')->default(0);
             $table->string('password');

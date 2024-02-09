@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 
 /*------------------------------------------
@@ -27,7 +27,7 @@ Auth::routes();
 All Normal Users Routes List
 --------------------------------------------
 --------------------------------------------*/
-Route::middleware(['auth', 'user-access:user'])->group(function () {
+Route::middleware(['auth', 'user-access:user','verified'])->group(function () {
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
@@ -37,7 +37,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 All Admin Routes List
 --------------------------------------------
 --------------------------------------------*/
-Route::middleware(['auth', 'user-access:admin'])->group(function () {
+Route::middleware(['auth', 'user-access:admin', 'verified'])->group(function () {
 
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
 });
@@ -47,7 +47,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 All Admin Routes List
 --------------------------------------------
 --------------------------------------------*/
-Route::middleware(['auth', 'user-access:university'])->group(function () {
+Route::middleware(['auth', 'user-access:university', 'verified'])->group(function () {
 
     Route::get('/university/home', [HomeController::class, 'universityHome'])->name('university.home');
 });

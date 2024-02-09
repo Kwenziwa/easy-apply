@@ -7,9 +7,11 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmailContract
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -20,9 +22,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'first_name',
-        'last_name',
         'middle_name',
+        'last_name',
+        'national_id',
+        'date_of_birth',
         'email',
+        'phone_number',
         'password',
         'type',
         'is_email_verified'
