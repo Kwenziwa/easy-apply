@@ -78,10 +78,7 @@ class RegisterController extends Controller
             'phone_number' => $data['phone_number'],
             'password' => Hash::make($data['password']),
         ]);
-
-
         $user->sendEmailVerificationNotification();
-
         return $user;
     }
 }

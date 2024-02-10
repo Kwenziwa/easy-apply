@@ -1,23 +1,18 @@
-@extends('layouts.app')
+@extends('layouts.master')
+
+@section('title')
+@lang('translation.Dashboard')
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+@component('components.breadcrumb')
+@slot('li_1')
+Dashboard
+@endslot
+@slot('title')
+Dashboard
+@endslot
+@endcomponent
 
-                <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                    @endif
 
-                    You are a User.
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
