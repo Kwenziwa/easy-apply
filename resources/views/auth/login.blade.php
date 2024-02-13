@@ -34,8 +34,7 @@
                                             <label class="form-label">Email</label>
                                             <input id="email" type="email"
                                                 class="form-control @error('email') is-invalid @enderror" name="email"
-                                                placeholder="Enter Email"
-                                                value="{{ old('email') }}" required
+                                                placeholder="Enter Email" value="{{ old('email') }}" required
                                                 autocomplete="email" autofocus>
 
                                             @error('email')
@@ -76,8 +75,9 @@
                                         <div class="row mb-4">
                                             <div class="col">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="remember-check">
-                                                    <label class="form-check-label" for="remember-check">
+                                                    <input class="form-check-input" type="checkbox" name="remember"
+                                                        id="remember">
+                                                    <label class="form-check-label" for="remember">
                                                         Remember me
                                                     </label>
                                                 </div>
@@ -126,6 +126,7 @@
                                 <div class="mt-4 mt-md-5 text-center">
                                     <script>
                                         document.write(new Date().getFullYear())
+
                                     </script> © Eazi Apply . Crafted with <i class="mdi mdi-heart text-danger"></i> by
                                     Eazi Apply</p>
                                 </div>

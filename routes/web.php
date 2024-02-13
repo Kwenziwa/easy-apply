@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SubjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +28,16 @@ Auth::routes(['verify' => true]);
 All Normal Users Routes List
 --------------------------------------------
 --------------------------------------------*/
-Route::middleware(['auth', 'user-access:user','verified'])->group(function () {
+Route::middleware(['auth', 'user-access:user', 'verified'])->group(function () {
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/subjects', [SubjectController::class, 'index'])->name('subjects');
+    Route::get('/subject/create', [SubjectController::class, 'create'])->name('subject.create');
+    Route::post('/subject/create', [SubjectController::class, 'attachSubject'])->name('subject.attachsubject');
+    Route::delete('/subject/{subject}', [SubjectController::class, 'deleteSubject'])->name('user.subject.delete');
+    Route::get('/subject-update/{subject}', [SubjectController::class, 'edit'])->name('user.editsubject');
+    Route::put('/subject/update-subject', [SubjectController::class, 'update'])->name('user.updatesubject');
+
 });
 
 /*------------------------------------------

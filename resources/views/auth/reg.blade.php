@@ -77,7 +77,8 @@
                                             <label for="date_of_birth" class="form-label">Date of Birth</label>
                                             <input id="date_of_birth" type="date" placeholder="Enter date_of_birth"
                                                 class="form-control @error('date_of_birth') is-invalid @enderror"
-                                                name="date_of_birth" value="{{ old('date_of_birth') }}" required>
+                                                name="date_of_birth" value="{{ old('date_of_birth') }}" required
+                                               >
 
                                             @error('date_of_birth')
                                             <span class="invalid-feedback" role="alert">
@@ -90,7 +91,8 @@
                                             <label for="national_id" class="form-label">ID Number</label>
                                             <input id="national_id" type="number" placeholder="Enter national_id"
                                                 class="form-control @error('national_id') is-invalid @enderror"
-                                                name="national_id" value="{{ old('national_id') }}" required>
+                                                name="national_id" value="{{ old('national_id') }}" required
+                                                >
 
                                             @error('national_id')
                                             <span class="invalid-feedback" role="alert">
@@ -106,20 +108,6 @@
                                                 value="{{ old('email') }}" required autocomplete="email">
 
                                             @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="phone_number" class="form-label">Mobile number</label>
-                                            <input id="phone_number" type="tel" placeholder="Enter Mobile"
-                                                class="form-control @error('phone_number') is-invalid @enderror"
-                                                name="phone_number" value="{{ old('phone_number') }}" required
-                                                autocomplete="phone_number">
-
-                                            @error('phone_number')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

@@ -9,3 +9,4 @@
 <script src="{{ URL::asset('build/libs/pace-js/pace.min.js') }}"></script>
 @yield('script')
 <script src="{{ URL::asset('build/js/app.js') }}"></script>
+

@@ -3,13 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Subject;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
@@ -64,5 +65,17 @@ class User extends Authenticatable implements MustVerifyEmailContract
         return new Attribute(
             get: fn($value) => ["user", "admin", "university"][$value],
         );
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class)
+            ->withPivot('result', 'level') // Include this to fetch pivot table columns
+            ->withTimestamps();
     }
 }
