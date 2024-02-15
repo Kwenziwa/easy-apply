@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\DocsKinController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\NextOfKinController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,8 @@ Route::middleware(['auth', 'user-access:user', 'verified'])->group(function () {
     Route::delete('/subject/{subject}', [SubjectController::class, 'deleteSubject'])->name('user.subject.delete');
     Route::get('/subject-update/{subject}', [SubjectController::class, 'edit'])->name('user.editsubject');
     Route::put('/subject/update-subject', [SubjectController::class, 'update'])->name('user.updatesubject');
+    Route::resource('/next-of-kin', NextOfKinController::class);
+    Route::resource('/my-documents', DocsKinController::class);
 
 });
 
@@ -60,3 +64,11 @@ Route::middleware(['auth', 'user-access:university', 'verified'])->group(functio
     Route::get('/university/home', [HomeController::class, 'universityHome'])->name('university.home');
 });
 
+Route::get('/clear', function () {
+    \Artisan::call('cache:clear');
+    \Artisan::call('view:clear');
+    \Artisan::call('route:clear');
+    \Artisan::call('clear-compiled');
+    \Artisan::call('config:cache');
+    dd("Cache is cleared");
+});

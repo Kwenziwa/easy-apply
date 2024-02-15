@@ -3,12 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Docs;
 use App\Models\Subject;
+use App\Models\NextOfKin;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 
@@ -78,4 +80,14 @@ class User extends Authenticatable implements MustVerifyEmailContract
             ->withPivot('result', 'level') // Include this to fetch pivot table columns
             ->withTimestamps();
     }
+
+    public function nextOfKin()
+    {
+        return $this->hasOne(NextOfKin::class);
+    }
+
+    public function docs(){
+        return $this->hasMany(Docs::class);
+    }
 }
+

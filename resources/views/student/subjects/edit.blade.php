@@ -17,9 +17,9 @@ Edit
     <div class="col-lg-6">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Sizing</h4>
-                <p class="card-title-desc">Set heights using classes like <code>.form-control-lg</code> and
-                    <code>.form-control-sm</code>.</p>
+                <h4 class="card-title">Updating Subject</h4>
+                <p class="card-title-desc">Fill in the information below to add a update Subject.
+                    <code>.Please enter all information according to your certifcate</code>.</p>
             </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('user.updatesubject') }}">

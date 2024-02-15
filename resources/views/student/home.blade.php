@@ -24,7 +24,8 @@ Dashboard
                     <div class="col-6">
                         <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Subjects</span>
                         <h4 class="mb-3">
-                            <span class="counter-value" data-target="10">0</span>
+                            <span class="counter-value"
+                                data-target="{{ $userWithSubjectsCount->subjects_count }}">{{ $userWithSubjectsCount->subjects_count }}</span>
                         </h4>
                     </div>
 
@@ -48,7 +49,8 @@ Dashboard
                      <div class="col-6">
                          <span class="text-muted mb-3 lh-1 d-block text-truncate">Points</span>
                          <h4 class="mb-3">
-                             <span class="counter-value" data-target="30">0</span>
+                             <span class="counter-value"
+                                 data-target="{{ $userWithLevelSum->level_sum }}">{{ $userWithLevelSum->level_sum }}</span>
                          </h4>
                      </div>
                  </div>

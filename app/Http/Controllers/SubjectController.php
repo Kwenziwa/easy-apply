@@ -7,8 +7,9 @@ use App\Models\Subject;
 use App\Models\SubjectUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Usernotnull\Toast\Concerns\WireToast;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class SubjectController extends Controller
 {
@@ -135,6 +136,9 @@ class SubjectController extends Controller
         $oldSubjectId = $request->old_subject_id;
         $newSubjectId = $request->new_subject_id;
 
+        Session::put('oldSubjectId', $oldSubjectId);
+        Session::put('newSubjectId', $newSubjectId);
+
         // Check if the user is already associated with the old subject
         if ($user->subjects()->find($oldSubjectId)) {
             // Detach the old subject and attach the new subject
@@ -142,7 +146,7 @@ class SubjectController extends Controller
             $user->subjects()->attach($newSubjectId, ['result' => $request->result, 'level' => $request->level,]); // Add any additional pivot fields if necessary
 
             toastr()->success('Subject updated successfully.', 'Congrats');
-            return redirect()->back();
+            return redirect('subjects');
         } else {
 
             toastr()->error('The selected subject was not found for the user.');

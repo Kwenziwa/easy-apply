@@ -21,6 +21,18 @@
                         <span data-key="t-subjects">Subjects</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('next-of-kin.index') }}">
+                        <i data-feather="users"></i>
+                        <span data-key="t-next-of-kin">Next Of Kin</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('my-documents.index') }}">
+                        <i data-feather="file-plus"></i>
+                        <span data-key="t-file-tex">Docs</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->
