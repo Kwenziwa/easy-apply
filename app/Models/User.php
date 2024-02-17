@@ -6,9 +6,10 @@ namespace App\Models;
 use App\Models\Docs;
 use App\Models\Subject;
 use App\Models\NextOfKin;
+use App\Models\Programme;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -86,8 +87,13 @@ class User extends Authenticatable implements MustVerifyEmailContract
         return $this->hasOne(NextOfKin::class);
     }
 
-    public function docs(){
+    public function docs()
+    {
         return $this->hasMany(Docs::class);
     }
-}
 
+    public function programmes()
+    {
+        return $this->hasMany(Programme::class);
+    }
+}

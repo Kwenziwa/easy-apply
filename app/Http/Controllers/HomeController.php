@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        
         $userId = Auth::id();
 
         $userWithLevelSum = User::select('users.id', 'users.first_name', 'users.last_name') // Specify needed columns
@@ -51,7 +51,8 @@ class HomeController extends Controller
      */
     public function adminHome(): View
     {
-        return view('admin.adminHome');
+
+        return view('admin.home');
     }
 
     /**
@@ -61,6 +62,6 @@ class HomeController extends Controller
      */
     public function universityHome(): View
     {
-        return view('university.universityHome');
+        return view('university.home');
     }
 }
