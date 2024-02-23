@@ -60,7 +60,7 @@ class SubjectController extends Controller
             $user->subjects()->syncWithoutDetaching([$subjectId => $pivotData]);
             // Redirect with success message
             toastr()->success('Data has been saved successfully!', 'Congrats');
-            return redirect('subjects');
+            return redirect()->route('subjects');
         } else if ($subjectExists) {
 
             toastr()->error('Oops! Subject already exist!', 'Oops!');
@@ -99,6 +99,7 @@ class SubjectController extends Controller
             // Detach the subject from the user
             $user->subjects()->detach($subjectId);
             // Redirect back with a success message
+            
             toastr()->success('Subject removed successfully.', 'Congrats');
             return redirect()->back();
         }

@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\UniversityController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DocsKinController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\NextOfKinController;
+use App\Http\Controllers\Admin\SchoolSubjectController;
 use App\Http\Controllers\Admin\UserController;
 
 /*
@@ -25,6 +27,12 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
+Route::get('/my-dashboard/{type}', [HomeController::class, 'dashboard'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+// Route::get('/home', [HomeController::class, 'home'])->name('home');
+
+
 
 /*------------------------------------------
 --------------------------------------------
@@ -33,7 +41,7 @@ All Normal Users Routes List
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:user', 'verified'])->prefix('student')->group(function () {
 
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('student.home');
     Route::get('/subjects', [SubjectController::class, 'index'])->name('subjects');
     Route::get('/subject/create', [SubjectController::class, 'create'])->name('subject.create');
     Route::post('/subject/create', [SubjectController::class, 'attachSubject'])->name('subject.attachsubject');
@@ -51,15 +59,14 @@ All Admin Routes List
 --------------------------------------------
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:admin', 'verified'])->prefix('admin')->group(function () {
-
-    Route::get('/', [HomeController::class, 'adminHome'])->name('admin.home');
+    Route::get('dashboard', [HomeController::class, 'adminHome'])->name('admin.home');
     Route::resource('/users', UserController::class);
+    Route::resource('/universities', UniversityController::class);
+    Route::resource('/school-subjects', SchoolSubjectController::class);
 
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin']], function () {
-    Route::get('dashboard', 'AdminController@dashboard');
-});
+
 
 /*------------------------------------------
 --------------------------------------------
@@ -73,7 +80,7 @@ Route::middleware(['auth', 'user-access:university', 'verified'])->prefix('unive
 
 Route::get('/clear', function () {
     \Artisan::call('cache:clear');
-    \Artisan::call('view:clear');
+    Artisan::call('view:clear');
     \Artisan::call('route:clear');
     \Artisan::call('clear-compiled');
     \Artisan::call('config:cache');

@@ -28,6 +28,29 @@ class VerificationController extends Controller
     protected $redirectTo = '/home';
 
     /**
+     * Where to redirect users after verification.
+     *
+     * @return string
+     */
+    protected function redirectTo()
+    {
+        // Example redirection logic based on user role
+        if (auth()->user()->type == 0) {
+            return redirect()->route('student.home');
+        } elseif (auth()->user()->type == 1) {
+            return redirect()->route('admin.home');
+        } elseif (auth()->user()->type == 2) {
+            return redirect()->route('university.home');
+        } else {
+            return '/';
+        }
+    }
+
+
+
+
+
+    /**
      * Create a new controller instance.
      *
      * @return void

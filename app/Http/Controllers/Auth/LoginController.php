@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -35,5 +36,19 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        switch ($user->type) {
+            case 'user':
+                return redirect()->route('student.home');
+            case 'admin':
+                return redirect()->route('admin.home');
+            case 'university':
+                return redirect()->route('university.home');
+            default:
+                return redirect('/');
+        }
     }
 }

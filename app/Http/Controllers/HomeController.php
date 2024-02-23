@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SubjectUser;
 use App\Models\User;
 use Illuminate\View\View;
+use App\Models\SubjectUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
+
         $userId = Auth::id();
 
         $userWithLevelSum = User::select('users.id', 'users.first_name', 'users.last_name') // Specify needed columns
@@ -64,4 +64,18 @@ class HomeController extends Controller
     {
         return view('university.home');
     }
+
+    public function dashboard($type)
+    {
+        if ($type == 'user') {
+            return redirect()->route('student.home');
+        } elseif ($type == 'admin') {
+            return redirect()->route('admin.home');
+        } elseif ($type == 'university') {
+            return redirect()->route('university.home');
+        } else {
+            return '/';
+        }
+    }
 }
+

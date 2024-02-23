@@ -87,13 +87,25 @@ class User extends Authenticatable implements MustVerifyEmailContract
         return $this->hasOne(NextOfKin::class);
     }
 
+    public function portfolio()
+    {
+        return $this->hasOne(Portfolio::class);
+    }
+
     public function docs()
     {
         return $this->hasMany(Docs::class);
     }
 
-    public function programmes()
+    
+
+    public function getRedirectRoute()
     {
-        return $this->hasMany(Programme::class);
+        return match ($this->type) {
+            'student' => 'student.home',
+            'admin' => 'admin.home',
+            'university' => 'university.home',
+            default => '/', // Including a default case to handle unexpected values
+        };
     }
 }

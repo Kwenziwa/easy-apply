@@ -13,8 +13,8 @@ return new class extends Migration {
         Schema::create('portfolios', function (Blueprint $table) {
             $table->id();
             $table->string('university_name');
-            $table->string('email')->nullable();
-            $table->string('phone_number')->nullable();
+            $table->string('uni_email')->nullable();
+            $table->string('uni_phone_number')->nullable();
             $table->string('logo')->nullable();
             $table->string('website_url')->nullable();
             $table->unsignedBigInteger('user_id');

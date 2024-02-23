@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,7 +12,9 @@ return new class extends Migration
     {
         Schema::create('programmes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('portfolio_id');
+            $table->foreign('portfolio_id')
+                ->references('id')->on('portfolios')->onDelete('cascade');
             $table->string('name');
             $table->string('code')->unique();
             $table->date('closing_date');

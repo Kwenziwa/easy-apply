@@ -10,20 +10,19 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class UserController extends Controller
-{
+class UniversityController extends Controller {
     use FileUploader; //add this trait
     // Display a listing of users
     public function index()
     {
-        $users = User::all();
-        return view('admin.users.index', compact('users'));
+        $users = User::where('type',2)->with('portfolio')->get();
+        return view('admin.university.index', compact('users'));
     }
 
     // Show the form for creating a new user
     public function create()
     {
-        return view('admin.users.create');
+        return view('admin.university.create');
     }
 
     // Store a newly created user in storage
@@ -86,20 +85,21 @@ class UserController extends Controller
             ]);
         }
 
-        toastr()->success('User created successfully.', 'User Created');
+        toastr()->success('University created successfully.', 'University Created');
         return redirect()->route('users.index');
     }
 
     // Display the specified user
     public function show(User $user)
     {
-        return view('admin.users.show', compact('user'));
+        return view('admin.university.show', compact('user'));
     }
 
     // Show the form for editing the specified user
-    public function edit(User $user)
+    public function edit($id)
     {
-        return view('admin.users.edit', compact('user'));
+        $user  = User::find($id);
+        return view('admin.university.edit', compact('user'));
     }
 
     // Update the specified user in storage
@@ -148,7 +148,7 @@ class UserController extends Controller
         // Update the user with the validated and possibly modified data
         $user->update($validatedData);
 
-        toastr()->success('User updated successfully.', 'User Updated');
+        toastr()->success('University updated successfully.', 'University Updated');
         return redirect()->route('users.index');
     }
 
@@ -158,15 +158,16 @@ class UserController extends Controller
 
         if ($user->exists()) {
 
-            if ($user->portfolio) {
+            if ($user->portfolio){
                 $user->portfolio->delete();
             }
+
             $user->delete();
-            toastr()->success('User Deletedd successfully.', 'User Deleted');
-            return redirect()->route('users.index');
+            toastr()->success('University Deletedd successfully.', 'University Deleted');
+            return back()->with('success', 'University deleted successfully.');
         }
 
         toastr()->error('Ooh this user was not found.', 'Error');
-        return redirect()->route('users.index');
+        return back();
     }
 }
