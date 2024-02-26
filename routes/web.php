@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\Admin\UniversityController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DocsKinController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\NextOfKinController;
-use App\Http\Controllers\Admin\SchoolSubjectController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProgrammeController;
+use App\Http\Controllers\Admin\UniversityController;
+use App\Http\Controllers\Admin\SchoolSubjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,6 @@ All Normal Users Routes List
 --------------------------------------------
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:user', 'verified'])->prefix('student')->group(function () {
-
     Route::get('/', [HomeController::class, 'index'])->name('student.home');
     Route::get('/subjects', [SubjectController::class, 'index'])->name('subjects');
     Route::get('/subject/create', [SubjectController::class, 'create'])->name('subject.create');
@@ -50,7 +50,6 @@ Route::middleware(['auth', 'user-access:user', 'verified'])->prefix('student')->
     Route::put('/subject/update-subject', [SubjectController::class, 'update'])->name('user.updatesubject');
     Route::resource('/next-of-kin', NextOfKinController::class);
     Route::resource('/my-documents', DocsKinController::class);
-
 });
 
 /*------------------------------------------
@@ -63,8 +62,11 @@ Route::middleware(['auth', 'user-access:admin', 'verified'])->prefix('admin')->g
     Route::resource('/users', UserController::class);
     Route::resource('/universities', UniversityController::class);
     Route::resource('/school-subjects', SchoolSubjectController::class);
-
+    Route::resource('/programmes', ProgrammeController::class);
 });
+
+
+Route::get('/subjects', [HomeController::class, 'getSubjects']);
 
 
 

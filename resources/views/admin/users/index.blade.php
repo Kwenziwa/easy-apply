@@ -13,81 +13,111 @@ Users
 Users
 @endslot
 @endcomponent
+
 <div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">All Users </h4>
-                <p class="card-title-desc">
-                    All Users in the system
-                </p>
-                <!-- Create Button -->
-                <a href="{{ route('users.create') }}" class="btn btn-primary" style="float: right;">Add User</a>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table mb-0">
+
+    <div class="table-responsive mb-3">
+
+        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="row">
+                <div class="card-header">
+                    <h4 class="card-title">All Users </h4>
+                    <p class="card-title-desc">
+                        All Users in the system
+                    </p>
+                    <a href="{{ route('users.create') }}" class="btn btn-primary" style="float: right;">Add
+                        User</a>
+                </div>
+                <div class="col-sm-12">
+
+                    <br />
+                    <table class="table align-middle datatable dt-responsive table-check nowrap dataTable no-footer"
+                        style="border-collapse: collapse; border-spacing: 0px 8px; width: 100%;" id="DataTables_Table_0"
+                        aria-describedby="DataTables_Table_0_info">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Verified</th>
-                                <th>Mobile Number</th>
-                                <th>Type</th>
-                                <th>Action</th>
-
+                                <th scope="col" class="sorting sorting_desc" tabindex="0"
+                                    aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                                    aria-label="ID: activate to sort column ascending" style="width: 10px;"
+                                    aria-sort="descending">#</th>
+                                <th scope="col" class="sorting sorting_desc" tabindex="0"
+                                    aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                                    aria-label="Name: activate to sort column ascending" style="width: 122px;"
+                                    aria-sort="descending">Full Name</th>
+                                <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                    rowspan="1" colspan="1" aria-label="University: activate to sort column
+                                    ascending" style="width: 125px;">Email </th>
+                                <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                    rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending"
+                                    style="width: 10px;">Verified</th>
+                                <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                    rowspan="1" colspan="1" aria-label="Website: activate to sort column ascending"
+                                    style="width: 153px;">Mobile Number</th>
+                                <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                    rowspan="1" colspan="1" aria-label="Mobile: activate to sort column ascending"
+                                    style="width: 50px;">Type</th>
+                                <th style="width: 80px; min-width: 80px;" class="sorting" tabindex="0"
+                                    aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                                    aria-label="Action: activate to sort column ascending">Action</th>
                             </tr>
                         </thead>
                         <tbody>
+
                             @foreach ($users as $user)
-                            <tr>
-                                <th scope="row">{{ $user->id }}</th>
-                                <td>{{ $user->fullname }}</td>
+                            <tr class="odd">
+                                <th scope="row" class="">
+                                    {{$user->id}}
+                                </th>
+                                <td class="sorting_1">
+
+
+                                    <a href="{{ route('users.show', $user->id) }}"
+                                        class="text-body">{{ $user->fullname }}</a>
+                                </td>
                                 <td>{{ $user->email }}</td>
-                                <td>
-                                    @if(isset($user->email_verified_at))
+                                <td> @if(isset($user->email_verified_at))
                                     <img src="{{ URL::asset('build/images/icons/check.png') }}" alt="">
                                     @else
                                     <img src="{{ URL::asset('build/images/icons/remove.png') }}" alt="">
-                                    @endif
+                                    @endif</td>
+                                <td>
+                                    {{ $user->phone_number }}
                                 </td>
-                                <td>{{ $user->phone_number }}</td>
                                 <td>{{ customBadge($user->type) }}</td>
-                                <td class="text-right">
+
+                                <td>
+
                                     <form id="delete-form-{{ $user->id }}"
                                         action="{{ route('users.destroy', $user->id) }}" method="POST">
-
-
                                         <a href="{{ route('users.edit',$user->id) }}"
                                             class="btn btn-warning btn-sm d-inline" title="Edit Action"><i
                                                 class="bx bx-pencil"></i></a>
                                         <a href="{{ route('users.show',$user->id) }}"
                                             class="btn btn-warning btn-sm d-inline" title="Edit View"><i
                                                 class="mdi mdi-eye"></i></a>
-
-
                                         @csrf {{-- CSRF token for security --}}
                                         @method('DELETE') {{-- Method spoofing to send a DELETE request --}}
                                         <button type="button" class="btn btn-danger btn-block btn-sm d-inline"
                                             onclick="confirmDelete({{ $user->id }})" title="Delete Action"><i
                                                 class="mdi mdi-delete"></i></button>
                                     </form>
-                                </td>
 
+                                </td>
                             </tr>
                             @endforeach
+
                         </tbody>
                     </table>
                 </div>
             </div>
-            <!-- end card body -->
-        </div>
-        <!-- end card -->
-    </div>
-    <!-- end col -->
-</div>
 
+        </div>
+        <!-- end table -->
+    </div>
+</div>
+@endsection
+
+@section('script')
 <!-- SweetAlert2 CDN -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -111,4 +141,12 @@ Users
     }
 
 </script>
+<!-- Required datatable js -->
+<script src="{{ URL::asset('build/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('build/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ URL::asset('build/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ URL::asset('build/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+
+<!-- init js -->
+<script src="{{ URL::asset('build/js/pages/datatable-pages.init.js') }}"></script>
 @endsection

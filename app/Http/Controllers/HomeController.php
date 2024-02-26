@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Subject;
 use Illuminate\View\View;
 use App\Models\SubjectUser;
 use Illuminate\Http\Request;
@@ -76,6 +77,12 @@ class HomeController extends Controller
         } else {
             return '/';
         }
+    }
+
+    public function getSubjects()
+    {
+        $subjects = Subject::all(); // Assuming you have a Subject model
+        return response()->json($subjects);
     }
 }
 

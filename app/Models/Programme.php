@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use App\Models\Portfolio;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +11,7 @@ class Programme extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'portfolio_id',
         'name',
         'code',
         'closing_date',
@@ -20,6 +19,7 @@ class Programme extends Model
         'min_entry_requirements',
         'entry_term',
         'course_duration',
+        'application_url',
         'access_route',
         'notes'
     ];
@@ -27,5 +27,11 @@ class Programme extends Model
     public function portfolio()
     {
         return $this->belongsTo(Portfolio::class);
+    }
+
+    // Programme model
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'programme_subject');
     }
 }

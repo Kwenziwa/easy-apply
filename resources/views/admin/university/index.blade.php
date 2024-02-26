@@ -14,10 +14,15 @@ University
 @endslot
 @endcomponent
 <div class="row">
+
     <div class="table-responsive mb-3">
+
         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
             <div class="row">
                 <div class="col-sm-12">
+                    <a href="{{ route('school-subjects.create') }}" class="btn btn-primary" >Add
+                        Subject</a>
+                    <br />
                     <table class="table align-middle datatable dt-responsive table-check nowrap dataTable no-footer"
                         style="border-collapse: collapse; border-spacing: 0px 8px; width: 100%;" id="DataTables_Table_0"
                         aria-describedby="DataTables_Table_0_info">
@@ -103,6 +108,11 @@ University
 <!-- end table responsive -->
 
 
+
+@endsection
+
+
+@section('script')
 <!-- SweetAlert2 CDN -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -124,12 +134,8 @@ University
             }
         })
     }
-
 </script>
-@endsection
 
-
-@section('script')
 <!-- Required datatable js -->
 <script src="{{ URL::asset('build/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ URL::asset('build/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>

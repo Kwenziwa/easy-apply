@@ -71,6 +71,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('programmes.index') }}">
+                        <i data-feather="file-text"></i>
+                        <span data-key="t-subjects">Programmes</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('next-of-kin.index') }}">
                         <i data-feather="users"></i>
                         <span data-key="t-next-of-kin">Next Of Kin</span>
