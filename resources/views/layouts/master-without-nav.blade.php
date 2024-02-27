@@ -21,6 +21,6 @@
 @yield('content')
 
 @include('layouts.vendor-script-without-nav')
-</body>
+</body >
 
 </html>

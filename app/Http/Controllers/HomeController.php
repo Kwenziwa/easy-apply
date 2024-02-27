@@ -84,5 +84,14 @@ class HomeController extends Controller
         $subjects = Subject::all(); // Assuming you have a Subject model
         return response()->json($subjects);
     }
+
+    public function toggleTheme(Request $request)
+    {
+        $theme = session('theme', 'light');
+        $newTheme = $theme === 'light' ? 'dark' : 'light';
+        session(['theme' => $newTheme]);
+
+        return back();
+    }
 }
 

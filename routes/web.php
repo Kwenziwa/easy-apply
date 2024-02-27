@@ -67,6 +67,7 @@ Route::middleware(['auth', 'user-access:admin', 'verified'])->prefix('admin')->g
 
 
 Route::get('/subjects', [HomeController::class, 'getSubjects']);
+Route::get('/toggle-theme', [HomeController::class, 'toggleTheme'])->name('toggle-theme');
 
 
 
@@ -86,5 +87,4 @@ Route::get('/clear', function () {
     \Artisan::call('route:clear');
     \Artisan::call('clear-compiled');
     \Artisan::call('config:cache');
-    dd("Cache is cleared");
 });

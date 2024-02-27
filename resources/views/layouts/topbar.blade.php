@@ -54,11 +54,12 @@
 
 
 
-            <div class="dropdown d-none d-sm-inline-block">
-                <button type="button" class="btn header-item" id="mode-setting-btn">
+            <div class="dropdown d-none d-sm-inline-block mb-0">
+                <br>
+                <a class="btn header-item mb-0"  href="{{ route('toggle-theme') }}">
                     <i data-feather="moon" class="icon-lg layout-mode-dark"></i>
                     <i data-feather="sun" class="icon-lg layout-mode-light"></i>
-                </button>
+                </a>
             </div>
 
 
@@ -70,8 +71,7 @@
                         src="@if (Auth::user()->avatar !=
                         ''){{ URL::asset('build/images/users/'. Auth::user()->avatar) }}@else{{ Avatar::create(Auth::user()->full_name )->toBase64() }}@endif"
                         alt="Header Avatar">
-                    <span
-                        class="d-none d-xl-inline-block ms-1 fw-medium">{{ Auth::user()->full_name }}</span>
+                    <span class="d-none d-xl-inline-block ms-1 fw-medium">{{ Auth::user()->full_name }}</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">

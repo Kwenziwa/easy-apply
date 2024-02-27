@@ -330,7 +330,7 @@ File: Main Js File
         $("input[name='layout']").on('change', function () {
             window.location.href = ($(this).val() == "vertical") ? "index": "layouts-horizontal";
         });
-        
+
         // on layout mode change
         $("input[name='layout-mode']").on('change', function () {
             if($(this).val() == "light") {

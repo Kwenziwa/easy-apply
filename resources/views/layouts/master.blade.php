@@ -13,7 +13,8 @@
     @include('layouts.head-css')
 </head>
 
-<body class="pace-done">
+<body class="pace-done" data-bs-theme="{{ $theme === 'dark' ? 'dark' : 'light' }}"
+    data-topbar="{{ $theme === 'dark' ? 'dark' : 'light' }}" data-sidebar="{{ $theme === 'dark' ? 'dark' : 'light' }}">
     <!-- Begin page -->
     <div id="layout-wrapper">
         @include('layouts.topbar')
