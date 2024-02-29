@@ -10,12 +10,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class UniversityController extends Controller {
+class UniversityController extends Controller
+{
     use FileUploader; //add this trait
     // Display a listing of users
     public function index()
     {
-        $users = User::where('type',2)->with('portfolio')->get();
+        $users = User::where('type', 2)->with('portfolio')->get();
         return view('admin.university.index', compact('users'));
     }
 
@@ -98,7 +99,7 @@ class UniversityController extends Controller {
     // Show the form for editing the specified user
     public function edit($id)
     {
-        $user  = User::find($id);
+        $user = User::find($id);
         return view('admin.university.edit', compact('user'));
     }
 
@@ -124,6 +125,22 @@ class UniversityController extends Controller {
             // If validation fails, redirect back to the form with the validation errors and old input
             return redirect()->back()->withErrors($validator)->withInput();
         }
+        $validator_portfolio = null;
+        if ($request->type == 'university') {
+
+            $validator_portfolio = Validator::make($request->all(), [
+                'uni_email' => 'required|email|max:255',
+                'uni_phone_number' => 'required|string|max:255',
+                'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'website_url' => 'required|url|max:255',
+                'university_name' => 'required|string|max:255'
+            ]);
+
+            if ($validator_portfolio->fails()) {
+                // If validation fails, redirect back to the form with the validation errors and old input
+                return redirect()->back()->withErrors($validator_portfolio)->withInput();
+            }
+        }
 
         $validatedData = $validator->validated();
 
@@ -147,6 +164,19 @@ class UniversityController extends Controller {
 
         // Update the user with the validated and possibly modified data
         $user->update($validatedData);
+        $portfolio = Portfolio::where('user_id', $user->id)->first();
+
+        $data_university = $validator_portfolio->validated();
+        if ($request->type == 'university') {
+            //use the method in the trait
+            if ($request->file('logo') != null) {
+                $data_university['logo'] = $request->file('logo')->store('university_logo', 'public');
+            } else {
+
+                $data_university['logo'] = $portfolio->logo;
+            }
+            $portfolio->update($data_university);
+        }
 
         toastr()->success('University updated successfully.', 'University Updated');
         return redirect()->route('users.index');
@@ -158,7 +188,7 @@ class UniversityController extends Controller {
 
         if ($user->exists()) {
 
-            if ($user->portfolio){
+            if ($user->portfolio) {
                 $user->portfolio->delete();
             }
 

@@ -141,7 +141,6 @@ University
 <script src="{{ URL::asset('build/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ URL::asset('build/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ URL::asset('build/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
-
 <!-- init js -->
 <script src="{{ URL::asset('build/js/pages/datatable-pages.init.js') }}"></script>
 @endsection

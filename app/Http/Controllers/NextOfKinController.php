@@ -32,6 +32,7 @@ class NextOfKinController extends Controller
     {
         $nextOfkin = NextOfKin::where('user_id', Auth::user()->id)->first();
 
+
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -42,7 +43,7 @@ class NextOfKinController extends Controller
         ]);
         $request->merge(['user_id' => Auth::user()->id]);
 
-        if($nextOfkin->exists()){
+        if($nextOfkin){
             NextOfKin::find($nextOfkin->id)->update($request->all());
             toastr()->success('Next Of Kin updated successfully.', 'Congrats');
 

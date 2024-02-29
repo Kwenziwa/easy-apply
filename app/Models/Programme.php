@@ -32,6 +32,7 @@ class Programme extends Model
     // Programme model
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class, 'programme_subject');
+        return $this->belongsToMany(Subject::class, 'programme_subject')->withPivot(['programme_id', 'subject_id', 'level']);
+        ;
     }
 }

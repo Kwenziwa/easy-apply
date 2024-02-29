@@ -64,7 +64,7 @@
                                 <h5 class="font-size-15 mb-1">Access Route:</h5>
                                 <p class="mb-2"> {{ $programme->access_route }}</p>
                                 <h5 class="font-size-15 mb-1">Application Website:</h5>
-                                <p class="mb-2"><a  href="{{$programme->application_url}}">Link</a></p>
+                                <p class="mb-2"><a href="{{$programme->application_url}}">Link</a></p>
                             </div>
                         </div>
                     </div>

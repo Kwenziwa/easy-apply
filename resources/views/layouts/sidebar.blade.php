@@ -101,7 +101,7 @@
                 <li class="menu-title" data-key="t-menu">@lang('translation.Menu')</li>
 
                 <li>
-                    <a href="{{ route('university') }}">
+                    <a href="{{ route('university.home') }}">
                         <i data-feather="home"></i>
                         <span data-key="t-dashboard">@lang('translation.Dashboard')</span>
                     </a>

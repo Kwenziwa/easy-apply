@@ -44,7 +44,7 @@ Programmes
                                 <th scope="col" class="sorting sorting_desc" tabindex="0"
                                     aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
                                     aria-label="Prigramme Name: activate to sort column ascending" style="width: 122px;"
-                                    aria-sort="descending">Prigramme Name</th>
+                                    aria-sort="descending">Programme Name</th>
                                 <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                     rowspan="1" colspan="1" aria-label="Institution : activate to sort column
                                     ascending" style="width: 125px;">Institution </th>

@@ -43,14 +43,14 @@ class ProgrammeController extends Controller
         // Filter out arrays that have null or empty 'subject_id' or 'level'
         if (!is_null($request->addMore)) {
             $filteredArray = array_filter($request->addMore, function ($item) {
-                return !empty($item['subject_id']) && !empty($item['level']);
+                return !empty ($item['subject_id']) && !empty ($item['level']);
             });
         }
 
         $validator = Validator::make($request->all(), [
             'portfolio_id' => 'required|exists:portfolios,id',
             'name' => 'required|string|max:255',
-            'code' => 'required|string|max:255|unique:programmes,code',
+            'code' => 'required|string|max:255|',
             'closing_date' => 'required|date',
             'min_points' => 'required|numeric',
             'min_entry_requirements' => 'required|string|max:255',
@@ -124,20 +124,14 @@ class ProgrammeController extends Controller
         // Filter out arrays that have null or empty 'subject_id' or 'level'
         if (!is_null($request->addMore)) {
             $filteredArray = array_filter($request->addMore, function ($item) {
-                return !empty($item['subject_id']) && !empty($item['level']);
+                return !empty ($item['subject_id']) && !empty ($item['level']);
             });
         }
 
         $validator = Validator::make($request->all(), [
             'portfolio_id' => 'required|exists:portfolios,id',
             'name' => 'required|string|max:255',
-            // Ensure the code is unique but ignore for the current programme
-            'code' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('programmes')->ignore($programme->id),
-            ],
+            'code' => 'required|string|max:255',
             'closing_date' => 'required|date',
             'min_points' => 'required|numeric',
             'min_entry_requirements' => 'required|string|max:255',

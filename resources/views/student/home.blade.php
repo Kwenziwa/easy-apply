@@ -70,7 +70,8 @@ Dashboard
                     <div class="col-6">
                         <span class="text-muted mb-3 lh-1 d-block text-truncate">Available Courses</span>
                         <h4 class="mb-3">
-                            <span class="counter-value" data-target="0">0</span>
+                            <span class="counter-value"
+                                data-target="{{$qualify_programmes->count()}}">({{$qualify_programmes->count() }})</span>
                         </h4>
                     </div>
                 </div>
@@ -129,7 +130,8 @@ Dashboard
     <div class="row align-items-center">
         <div class="col-md-6">
             <div class="mb-3">
-                <h5 class="card-title">Course List <span class="text-muted fw-normal ms-2">(834)</span></h5>
+                <h5 class="card-title">Course Available: <span
+                        class="text-muted fw-normal ms-2">({{$qualify_programmes->count()}})</span></h5>
             </div>
         </div>
 
@@ -137,75 +139,51 @@ Dashboard
     </div>
     <!-- end row -->
 
+
+
     <div class="row">
+        @foreach ($qualify_programmes as $qualify_programme)
         <div class="col-xl-3 col-sm-6">
+
             <div class="card text-center">
                 <div class="card-body">
                     <div class="dropdown text-end">
-                        <a class="text-muted dropdown-toggle font-size-16" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true">
-                            <i class="bx bx-dots-horizontal-rounded"></i>
-                        </a>
+                        <span class="bg-danger badge me-2">#{{ $qualify_programme->code }}</span>
                     </div>
 
                     <div class="mx-auto mb-4">
-                        <img src="assets/images/users/avatar-2.jpg" alt=""
+                        <img src="{{ url('storage/'.$qualify_programme->portfolio->logo) }}" alt=""
                             class="avatar-xl rounded-circle img-thumbnail">
                     </div>
-                    <h5 class="font-size-16 mb-1"><a href="#" class="text-body">Phyllis Gatlin</a></h5>
-                    <p class="text-muted mb-2">Full Stack Developer</p>
+                    <h5 class="font-size-16 mb-1"><a href="#" class="text-body">{{ $qualify_programme->name }}</a></h5>
+                    <p class="text-muted mb-2">{{ $qualify_programme->portfolio->university_name }}</p>
+                    <p class="text-muted mb-2">{{ $qualify_programme->min_entry_requirements }}</p>
+                    <p class="text-muted mb-2">Closing Date: <span
+                            class="bg-warning badge me-2">{{ $qualify_programme->closing_date}}</span> </p>
+                    <p class="text-muted mb-2">Points:<span
+                            class="bg-success badge me-2">{{$qualify_programme->min_points}}</span>|| Entry Term:
+                        <span class="bg-success badge me-2">{{$qualify_programme->entry_term}}</span> || Duration:
+                        <span class="bg-success badge me-2">{{$qualify_programme->course_duration}}</span></p>
+
 
                 </div>
 
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i>
-                        Profile</button>
-                    <button type="button" class="btn btn-outline-light text-truncate"><i
-                            class="uil uil-envelope-alt me-1"></i> Message</button>
+                    <a href="{{ route('my-programme.show',$qualify_programme->id) }}"
+                        class="btn btn-outline-light btn-success text-white"><i class="uil uil-user me-1"></i>
+                        View</a>
+                    <a href="{{ $qualify_programme->application_url }}"
+                        class="btn btn-outline-light  btn-primary text-white"><i class="uil uil-envelope-alt me-1"></i>
+                        Apply</a>
 
                 </div>
             </div>
             <!-- end card -->
         </div>
+        @endforeach
         <!-- end col -->
     </div>
-    <!-- end row -->
 
-    <div class="row g-0 align-items-center mb-4">
-        <div class="col-sm-6">
-            <div>
-                <p class="mb-sm-0">Showing 1 to 10 of 57 entries</p>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="float-sm-end">
-                <ul class="pagination mb-sm-0">
-                    <li class="page-item disabled">
-                        <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link">1</a>
-                    </li>
-                    <li class="page-item active">
-                        <a href="#" class="page-link">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- end row -->
 
 </div>
 

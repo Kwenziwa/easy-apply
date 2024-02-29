@@ -10,6 +10,8 @@ class SubjectUser extends Model
 {
     use HasFactory;
 
+    protected $table = 'subject_user';
+
     public function subjects()
     {
         return $this->belongsToMany(Subject::class)->using(SubjectUser::class)->withTimestamps();

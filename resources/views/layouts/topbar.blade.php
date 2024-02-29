@@ -56,7 +56,7 @@
 
             <div class="dropdown d-none d-sm-inline-block mb-0">
                 <br>
-                <a class="btn header-item mb-0"  href="{{ route('toggle-theme') }}">
+                <a class="btn header-item mb-0" href="{{ route('toggle-theme') }}">
                     <i data-feather="moon" class="icon-lg layout-mode-dark"></i>
                     <i data-feather="sun" class="icon-lg layout-mode-light"></i>
                 </a>
@@ -76,7 +76,8 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="#!"><i class="mdi mdi-face-man font-size-16 align-middle me-1"></i>
+                    <a class="dropdown-item" href="{{ route('my-account.show', Auth::user()->id) }}"><i
+                            class="mdi mdi-face-man font-size-16 align-middle me-1"></i>
                         Profile</a>
                     <a class="dropdown-item" href="#!"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i> Lock
                         screen</a>

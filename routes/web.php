@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Common\UserProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\NextOfKinController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProgrammeController;
+use App\Http\Controllers\Student\StudentProgrammeController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\SchoolSubjectController;
 
@@ -34,6 +36,10 @@ Route::get('/my-dashboard/{type}', [HomeController::class, 'dashboard'])
 // Route::get('/home', [HomeController::class, 'home'])->name('home');
 
 
+Route::middleware(['auth', 'verified'])->prefix('settings')->group(function () {
+
+    Route::resource('my-account', UserProfileController::class);
+});
 
 /*------------------------------------------
 --------------------------------------------
@@ -50,6 +56,7 @@ Route::middleware(['auth', 'user-access:user', 'verified'])->prefix('student')->
     Route::put('/subject/update-subject', [SubjectController::class, 'update'])->name('user.updatesubject');
     Route::resource('/next-of-kin', NextOfKinController::class);
     Route::resource('/my-documents', DocsKinController::class);
+    Route::resource('my-programme', StudentProgrammeController::class);
 });
 
 /*------------------------------------------

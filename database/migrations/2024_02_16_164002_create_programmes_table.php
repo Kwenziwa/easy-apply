@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->foreign('portfolio_id')
                 ->references('id')->on('portfolios')->onDelete('cascade');
             $table->string('name');
-            $table->string('code')->unique();
+            $table->string('code');
             $table->date('closing_date');
             $table->integer('min_points');
             $table->text('min_entry_requirements');
