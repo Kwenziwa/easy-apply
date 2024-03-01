@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Chromeco</title>
+    <title>Eazi Apply</title>
 
     <!-- CSS FILES -->
     <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -35,7 +35,7 @@ https://templatemo.com/tm-581-kind-heart-charity
                 <div class="col-lg-8 col-12 d-flex flex-wrap">
                     <p class="d-flex me-4 mb-0">
                         <i class="bi-geo-alt me-2"></i>
-                        ALX - Chromeco
+                        ALX - Eazi Apply
                     </p>
 
                     <p class="d-flex mb-0">
@@ -78,11 +78,12 @@ https://templatemo.com/tm-581-kind-heart-charity
     <nav class="navbar navbar-expand-lg bg-light shadow-lg">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="{{ asset('frontend/images/logo.png') }}" class="logo img-fluid"
+                <img src="{{ asset('build/images/logo-sm.svg') }}" class="logo img-fluid"
                     alt="Chronic Medication Collection">
                 <span>
-                    Chronic Medication Collection
-                    <small>YEmpowering Health, One Pill at a Time</small>
+                    Eazi Apply
+                    <small>Fostering Education, One Matriculant at a Time: Your journey to a Good Career Starts
+                        Here</small>
                 </span>
             </a>
 
@@ -111,15 +112,16 @@ https://templatemo.com/tm-581-kind-heart-charity
 
                     @auth
                     <li class="nav-item ms-3">
-                        <a class="nav-link custom-btn custom-border-btn btn" href="/admin/login">Dashboard</a>
+                        <a class="nav-link custom-btn custom-border-btn btn"
+                            href="{{ route('dashboard',Auth::user()->type) }}">Dashboard</a>
                     </li>
 
                     @else
                     <li class="nav-item ms-3">
-                        <a class="nav-link custom-btn custom-border-btn btn" href="/admin/login">Sign In</a>
+                        <a class="nav-link custom-btn custom-border-btn btn" href="{{ route('login') }}">Sign In</a>
                     </li>
                     <li class="nav-item ms-3">
-                        <a class="nav-link custom-btn custom-border-btn btn" href="/admin/register">Sign Up</a>
+                        <a class="nav-link custom-btn custom-border-btn btn" href="{{ route('register') }}">Sign Up</a>
                     </li>
                     @endauth
                 </ul>
@@ -141,9 +143,10 @@ https://templatemo.com/tm-581-kind-heart-charity
                                         class="carousel-image img-fluid" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>Chromeco</h1>
+                                        <h1>Eazi Apply</h1>
 
-                                        <p>Empowering Health, One Pill at a Time</p>
+                                        <p>Your journey to a Good Career
+                                            Starts Here</p>
                                     </div>
                                 </div>
                             </div>
@@ -160,7 +163,7 @@ https://templatemo.com/tm-581-kind-heart-charity
                 <div class="row">
 
                     <div class="col-lg-10 col-12 text-center mx-auto">
-                        <h2 class="mb-5">Welcome to Chromeco</h2>
+                        <h2 class="mb-5">Welcome to Eazi Apply</h2>
                     </div>
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
@@ -224,29 +227,31 @@ https://templatemo.com/tm-581-kind-heart-charity
                         <div class="custom-text-box">
                             <h2 class="mb-2">About Us</h2>
 
-                            <h5 class="mb-3">"Empowering Health, One Pill at a Time: Your Journey to Wellness Starts
-                                Here."</h5>
+                            <h5 class="mb-3">"Fostering Education, One Matriculant at a Time: Your journey to a Good
+                                Career Starts Here"</h5>
 
-                            <p class="mb-0">Chromeco is a web app designed to enable patients to receive their chronic
-                                medication without enduring long queues in South African healthcare sectors.
-                                The creators of this project both hail from the rural township of KZN. Having been
-                                raised by elderly individuals who regularly collected their repeat medication
-                                from public clinics or hospitals, the elders experienced the pressure of waking
-                                up early to secure timely service. Unfortunately, they often returned home without
-                                assistance due to overcrowded health sectors where regular and new clients were
-                                indistinguishable. <br><br><br>
-                                Observing this recurring issue without effective solutions prompted the inspiration
-                                for Chromeco. The goal is to assist individuals with chronic medication needs by
-                                providing a more convenient collection process. The creators were motivated by
-                                personal experiences and the lack of mitigations in place over the years.
-                                The project aims to streamline the medication collection process through
-                                technology, ensuring that individuals can access their medication at more
-                                suitable times.
-                                This initiative serves as our Portfolio Project, marking the conclusion of our
-                                Foundations year at ALX Africa. Following three weeks of development, a functional
-                                program was presented as a result of our efforts. You can downalod our project here <a
-                                    href="https://github.com/Kwenziwa/chromecoapp" class="social-icon-link
-                                    bi-github"></a> <a href="https://github.com/Kwenziwa/chromecoapp"
+                            <p class="mb-0">Eazi Apply is a web app designed to enable matriculants to make online
+                                university applications without self-rejecting due to applying to irrelevant courses or
+                                failing to meet minimum course requirements after the release of final results in South
+                                African institutes of higher learning during the late application period. The creators
+                                of this project both hail from the rural township of KZN and are graduates from South
+                                African universities. Having been raised in households with non-technology-savvy
+                                individuals, university applications were a headache for us, leading to unnecessary
+                                mistakes that often resulted in rejections.
+                                <br><br><br>
+                                Observing this recurring issue, we assisted matriculants who consulted about their
+                                incorrectly done applications with little to no assistance from their closest people.
+                                The
+                                goal is to assist matric graduates with the desire of furthering their education by
+                                providing a more convenient application process. The creators were motivated by personal
+                                experiences and witnessing these experiences becoming the next generation's reality. The
+                                project aims to streamline the late university application process by helping students
+                                apply for courses that suit the points they obtained as final results, reducing the
+                                pressure and cost of late applications. This initiative serves as our Portfolio Project,
+                                marking the conclusion of our Specialization study period at ALX Africa. Following two
+                                weeks of development, a functional program was presented as a result of our efforts.
+                                <a href="https://github.com/Kwenziwa/easy-apply" class="social-icon-link
+                                    bi-github"></a> <a href="https://github.com/Kwenziwa/easy-apply"
                                     class="custom-btn custom-border-btn btn">Download Now</a>
                             </p>
                         </div>
@@ -341,7 +346,7 @@ https://templatemo.com/tm-581-kind-heart-charity
                     </div>
 
                     <div class="col-lg-5 col-12">
-                        <a href="/admin/register" class="custom-btn btn smoothscroll">Sign Up Now!</a>
+                        <a href="{{ route('register') }}" class="custom-btn btn smoothscroll">Sign Up Now!</a>
                     </div>
 
                 </div>
@@ -364,12 +369,12 @@ https://templatemo.com/tm-581-kind-heart-charity
 
                             <div class="custom-block">
                                 <div class="custom-block-body">
-                                    <h5 class="mb-3">Medication Tracking</h5>
+                                    <h5 class="mb-3">Auto APS score calculator </h5>
 
-                                    <p>Allow users to track their medication intake, providing a
-                                        digital log that includes dosage, frequency, and any additional
-                                        notes. Implement reminders to help users stay consistent with their
-                                        medication schedule.</p>
+                                    <p>Allows users to calculate their admission score based on their final matric
+                                        marks. This tool determines the user's eligibility for late applications to
+                                        South African universities.
+                                    </p>
 
 
                                 </div>
@@ -385,11 +390,12 @@ https://templatemo.com/tm-581-kind-heart-charity
 
                             <div class="custom-block">
                                 <div class="custom-block-body">
-                                    <h5 class="mb-3">Pharmacy Integration</h5>
+                                    <h5 class="mb-3">Instant course match</h5>
 
-                                    <p>Integrate with local pharmacies to facilitate seamless medication collection.
-                                        Users can choose their preferred pharmacy, place medication orders, and receive
-                                        notifications when their prescriptions are ready for pickup.</p>
+                                    <p>Integrates with provincial universities to facilitate an instant program match.
+                                        Users receive a list of courses they qualify for based on the required course
+                                        APS score and major subjects, and are then prompted to apply.
+                                    </p>
 
 
                                 </div>
@@ -405,12 +411,13 @@ https://templatemo.com/tm-581-kind-heart-charity
 
                             <div class="custom-block">
                                 <div class="custom-block-body">
-                                    <h5 class="mb-3">Medication Pick-up Reminder</h5>
+                                    <h5 class="mb-3">Direct University Application </h5>
 
-                                    <p>The Medication Pick-up Reminder feature is designed to enhance user
-                                        adherence and convenience by
-                                        sending timely reminders for users to collect their prescribed medications
-                                        from the chosen pharmacy. </p>
+                                    <p>The Direct University Application button is designed for users to send an
+                                        immediate, direct application for the most preferred course that Eazi Apply has
+                                        matched them with, allowing them to register with the selected university
+                                        directly.
+                                    </p>
 
 
 
@@ -502,7 +509,7 @@ https://templatemo.com/tm-581-kind-heart-charity
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-12 mb-4">
-                    <img src="{{ asset('frontend/images/logo.png') }}" class="logo img-fluid" alt="">
+                    <img src="{{ asset('build/images/logo-sm.svg') }}" class="logo img-fluid" alt="">
                 </div>
 
                 <div class="col-lg-4 col-md-6 col-12 mb-4">
