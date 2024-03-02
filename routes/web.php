@@ -1,17 +1,21 @@
 <?php
 
-use App\Http\Controllers\Common\UserProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DocsKinController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\NextOfKinController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\StudentDocsKinController;
 use App\Http\Controllers\Admin\ProgrammeController;
-use App\Http\Controllers\Student\StudentProgrammeController;
 use App\Http\Controllers\Admin\UniversityController;
+use App\Http\Controllers\Common\UserProfileController;
 use App\Http\Controllers\Admin\SchoolSubjectController;
+use App\Http\Controllers\University\UniProgrammeController;
+use App\Http\Controllers\Student\StudentProgrammeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +74,7 @@ Route::middleware(['auth', 'user-access:admin', 'verified'])->prefix('admin')->g
     Route::resource('/universities', UniversityController::class);
     Route::resource('/school-subjects', SchoolSubjectController::class);
     Route::resource('/programmes', ProgrammeController::class);
+    Route::resource('/student-documents', StudentDocsKinController::class);
 });
 
 
@@ -86,6 +91,8 @@ All Admin Routes List
 Route::middleware(['auth', 'user-access:university', 'verified'])->prefix('university')->group(function () {
 
     Route::get('/home', [HomeController::class, 'universityHome'])->name('university.home');
+    Route::resource('/my-programmes', UniProgrammeController::class);
+
 });
 
 Route::get('/clear', function () {

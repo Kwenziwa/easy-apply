@@ -1,0 +1,268 @@
+@extends('layouts.master')
+
+@section('title')
+Update Programme
+@endsection
+@section('css')
+
+<!-- twitter-bootstrap-wizard css -->
+<link rel="stylesheet" href="{{ URL::asset('build/libs/twitter-bootstrap-wizard/prettify.css') }}">
+
+@endsection
+
+@section('content')
+@component('components.breadcrumb')
+@slot('li_1') Programme @endslot
+@slot('title') Update @endslot
+@endcomponent
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Update Programme</h4>
+                <p class="card-title-desc">Fill in all the information below and click Submit to create a new subject.
+                </p>
+            </div>
+            <div class="card-body">
+                {{-- Display All Validation Errors --}}
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                <form action="{{ route('my-programmes.update',$programme) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="row">
+                        <div class="col-md-6">
+                            
+
+                            <!-- Name -->
+                            <div class="mb-3">
+                                <label class="form-label">Programme Name</label>
+                                <input type="text" class="form-control" name="name" value="{{ $programme->name }}"
+                                    required>
+                            </div>
+
+                            <!-- Code -->
+                            <div class="mb-3">
+                                <label class="form-label">Code</label>
+                                <input type="text" class="form-control" name="code" value="{{ $programme->code}}"
+                                    required>
+                            </div>
+
+                            <!-- Closing Date -->
+                            <div class="mb-3">
+                                <label class="form-label">Closing Date</label>
+                                <input type="date" class="form-control" name="closing_date"
+                                    value="{{ $programme->closing_date }}" required>
+                            </div>
+
+                            <!-- Minimum Points -->
+                            <div class="mb-3">
+                                <label class="form-label">Minimum Points</label>
+                                <input type="number" class="form-control" name="min_points"
+                                    value="{{ $programme->min_points }}" required>
+                            </div>
+
+                            <!-- Minimum Entry Requirements -->
+                            <div class="mb-3">
+                                <label class="form-label">Minimum Entry Requirements</label>
+                                <textarea class="form-control"
+                                    name="min_entry_requirements">{{ $programme->min_entry_requirements }}</textarea>
+                            </div>
+
+                            <!-- Entry Term -->
+                            <div class="mb-3">
+                                <label class="form-label">Entry Term</label>
+                                <input type="text" class="form-control" name="entry_term"
+                                    value="{{ $programme->entry_term }}" required>
+                            </div>
+
+                            <!-- Entry Term -->
+                            <div class="mb-3">
+                                <label class="form-label">Application Website</label>
+                                <input type="text" class="form-control" name="application_url"
+                                    value="{{ $programme->application_url}}" required>
+                            </div>
+
+                            <!-- Course Duration -->
+                            <div class="mb-3">
+                                <label class="form-label">Course Duration</label>
+                                <input type="number" class="form-control" name="course_duration"
+                                    value="{{ $programme->course_duration }}" required>
+                            </div>
+
+                            <!-- Access Route -->
+                            <div class="mb-3">
+                                <label class="form-label">Access Route</label>
+                                <input type="text" class="form-control" name="access_route"
+                                    value="{{ $programme->access_route }}">
+                            </div>
+
+                            <!-- Notes -->
+                            <div class="mb-3">
+                                <label class="form-label">Notes</label>
+                                <textarea class="form-control" name="notes">{{ $programme->notes   }}</textarea>
+                            </div>
+
+                            <div class="mb-8">
+
+                                <label class="form-label">Subject Required for this programme: </label>
+                                <table class="table table-bordered" id="dynamicTable">
+                                    <tr>
+                                        <th>Subject Required</th>
+                                        <th>Level Required</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    @if($programme_subject->isEmpty())
+                                    @php
+                                    $key=0;
+                                    @endphp
+                                    <tr>
+                                        <td>
+                                            <select class="form-select" name="addMore[0][subject_id]">
+                                                <option value="">Select</option>
+                                                @foreach ($subjects as $subject)
+                                                <option value="{{ $subject['id'] }}"
+                                                    @selected(old('subject_id')==$subject['id'])>
+                                                    {{ $subject['name'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <select class="form-select" name="addMore[0][level]">
+                                                <option value="">Select Level</option>
+                                                <?php for ($i = 1; $i <= 7; $i++): ?>
+                                                <option value="<?php echo $i; ?>" @selected(old('level')==$i)>
+                                                    <?php echo $i; ?>
+                                                </option>
+                                                <?php endfor; ?>
+                                            </select>
+                                        </td>
+
+
+                                        <td><button type="button" name="add" id="add" class="btn btn-success">Add
+                                                More Subject</button></td>
+                                    </tr>
+                                    @else
+                                    @foreach($programme_subject as $key => $value)
+
+                                    <tr>
+                                        <td>
+                                            <select class="form-select" name="addMore[{{ $key }}][subject_id]">
+                                                <option value="">Select</option>
+                                                @foreach ($subjects as $subject)
+                                                <option value="{{ $subject['id'] }}"
+                                                    @selected($value['subject_id']==$subject['id'])>
+                                                    {{ $subject['name'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <select class="form-select" name="addMore[{{ $key }}][level]">
+                                                <option value="">Select Level</option>
+                                                <?php for ($i = 1; $i <= 7; $i++): ?>
+                                                <option value="<?php echo $i; ?>" @selected($value['level']==$i)>
+                                                    <?php echo $i; ?>
+                                                </option>
+                                                <?php endfor; ?>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            @if ($key ==0)
+                                            <button type="button" name="add" id="add" class="btn btn-success">Add
+                                                More Subject</button>
+
+                                            @else
+                                            <button type="button" class="btn btn-danger remove-tr">Remove</button></td>
+                                        @endif
+
+
+
+                                    </tr>
+                                    @php $key; @endphp
+                                    @endforeach
+                                    @endif
+                                </table>
+
+                            </div>
+
+
+
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+@section('script')
+
+<!-- twitter-bootstrap-wizard js -->
+<script src="{{ URL::asset('build/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}"></script>
+<script src="{{ URL::asset('build/libs/twitter-bootstrap-wizard/prettify.js') }}"></script>
+
+<!-- form wizard init -->
+<script src="{{ URL::asset('build/js/pages/form-wizard.init.js') }}"></script>
+
+<script type="text/javascript">
+    let subjectsOptions = '';
+    var myJsVar = @json($key);
+    console.log(myJsVar);
+
+    // Fetch subjects when document is ready
+    fetchSubjects();
+
+    let i = @json($key); // Initial row number
+    let levelsOptions = '<option value="">Select Level</option>';
+    for (let level = 1; level <= 7; level++) {
+        levelsOptions += '<option value="' + level + '">' + level + '</option>';
+    }
+    $("#add").click(function () {
+        ++i;
+        $("#dynamicTable").append('<tr><td><select name="addMore[' + i +
+            '][subject_id]" class="form-control">' + subjectsOptions +
+            '</select></td> <td><select name="addMore[' + i + '][level]" class="form-control">' +
+            levelsOptions +
+            '</select></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>'
+        );
+    });
+
+    // Remove row
+    $(document).on('click', '.remove-tr', function () {
+        $(this).parents('tr').remove();
+    });
+
+
+    function fetchSubjects() {
+        $.ajax({
+            url: '/subjects', // Adjust the URL to your endpoint
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                subjectsOptions = '<option value="">Select Subject</option>';
+                $.each(response, function (key, subject) {
+                    subjectsOptions += '<option value="' + subject.id + '">' + subject.name +
+                        '</option>';
+                });
+            }
+        });
+    }
+
+</script>
+@endsection

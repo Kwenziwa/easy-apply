@@ -156,6 +156,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
 
+        if ($user->type == 'admin') {
+            toastr()->error('Ooh this user was not found.', 'Error');
+            return redirect()->route('users.index');
+        }
+
         if ($user->exists()) {
 
             if ($user->portfolio) {

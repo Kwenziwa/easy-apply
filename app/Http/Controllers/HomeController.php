@@ -6,10 +6,12 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Subject;
+use App\Models\Portfolio;
 use App\Models\Programme;
 use Illuminate\View\View;
 use App\Models\SubjectUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -81,8 +83,40 @@ class HomeController extends Controller
      */
     public function adminHome(): View
     {
+        $usersPerMonth = User::select(DB::raw("COUNT(*) as count"), DB::raw("MONTH(created_at) as month"))
+            ->whereYear('created_at', date('Y'))
+            ->groupBy('month')
+            ->orderBy('month', 'ASC')
+            ->get();
 
-        return view('admin.home');
+        $months = [];
+        $counts = [];
+
+        foreach ($usersPerMonth as $data) {
+            $months[] = date('F', mktime(0, 0, 0, $data->month, 1)); // Convert month number to month name
+            $counts[] = $data->count;
+        }
+
+        $userTypes = User::select('type', DB::raw('count(*) as count'))
+            ->groupBy('type')
+            ->get();
+
+        $types = $userTypes->pluck('type');
+        $type_counts = $userTypes->pluck('count');
+
+        // Get
+        $now = Carbon::now();
+        $beforeNow = Programme::where('closing_date', '<', $now)->count();
+        $afterNow = Programme::where('closing_date', '>=', $now)->count();
+
+        //data
+        $count_data = [
+            'students_counter' => User::where('type', 0)->count(),
+            'university_counter' => User::where('type', 2)->count(),
+            'program_count' => Programme::count(),
+            'subject_count' => Subject::count(),
+        ];
+        return view('admin.home', compact('months', 'counts', 'types', 'type_counts', 'beforeNow', 'afterNow', 'count_data'));
     }
 
     /**
@@ -93,26 +127,27 @@ class HomeController extends Controller
     public function universityHome(): View
     {
 
-        $userId = Auth::id();
 
+        $user = Auth::user();
         $userWithLevelSum = User::select('users.id', 'users.first_name', 'users.last_name')
             ->selectRaw('SUM(subject_user.level) as level_sum')
             ->join('subject_user', 'users.id', '=', 'subject_user.user_id')
             ->join('subjects', 'subjects.id', '=', 'subject_user.subject_id')
-            ->where('users.id', $userId)
+            ->where('users.id', $user->id)
             ->groupBy('users.id', 'users.first_name', 'users.last_name')
             ->first();
 
-        $userWithSubjectsCount = User::withCount('subjects')->find($userId);
+        $userWithSubjectsCount = User::withCount('subjects')->find($user->id);
+        $avail_programmes = Programme::where('portfolio_id', $user->portfolio->id);
+        $total_programme = $avail_programmes->count();
 
-        // get user subject and results
-        $userSubjects = SubjectUser::where('user_id', $userId)->get(['subject_id', 'level']);
-        // get programmes, subject and results
-        $avail_programmes = Programme::with('subjects')->paginate(1);
-        $qualify_programmes = Programme::where('min_points', '>=', $userWithSubjectsCount)->whereDate('closing_date', '>', Carbon::now())->get();
+        $open_programmes = $avail_programmes->whereDate('closing_date', '>', Carbon::now())->count();
+        $closed_programmes = $avail_programmes->whereDate('closing_date', '<', Carbon::now())->count();
+
+        $recent_programmes = Programme::where('portfolio_id', $user->portfolio->id)->orderBy('created_at', 'desc')->take(1)->get();
 
 
-        return view('university.home', compact('userWithLevelSum', 'userWithSubjectsCount', 'qualify_programmes'));
+        return view('university.home', compact('total_programme', 'open_programmes', 'closed_programmes', 'recent_programmes'));
     }
 
     public function dashboard($type)

@@ -22,10 +22,10 @@ Dashboard
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-6">
-                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Subjects</span>
+                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Programms</span>
                         <h4 class="mb-3">
                             <span class="counter-value"
-                                data-target="{{ $userWithSubjectsCount->subjects_count ?? '0'}}">{{ $userWithSubjectsCount->subjects_count ?? '0'}}</span>
+                                data-target="{{ $total_programme ?? '0'}}">{{ $total_programme ?? '0'}}</span>
                         </h4>
                     </div>
 
@@ -34,7 +34,7 @@ Dashboard
                     </div>
                 </div>
                 <div class="text-nowrap">
-                    <span class="ms-1 text-muted font-size-13">All subjects</span>
+                    <span class="ms-1 text-muted font-size-13">All Programms</span>
                 </div>
             </div><!-- end card body -->
         </div><!-- end card -->
@@ -47,15 +47,15 @@ Dashboard
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-6">
-                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Points</span>
+                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Open Applications </span>
                         <h4 class="mb-3">
                             <span class="counter-value"
-                                data-target="{{ $userWithLevelSum->level_sum ?? '0'}}">{{ $userWithLevelSum->level_sum ?? '0'}}</span>
+                                data-target="{{ $open_programmes ?? '0'}}">{{ $open_programmes ?? '0'}}</span>
                         </h4>
                     </div>
                 </div>
                 <div class="text-nowrap">
-                    <span class="ms-1 text-muted font-size-13">All your points excluding LO.</span>
+                    <span class="ms-1 text-muted font-size-13">All Open for application.</span>
                 </div>
             </div><!-- end card body -->
         </div><!-- end card -->
@@ -68,15 +68,16 @@ Dashboard
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-6">
-                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Available Courses</span>
+                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Closed Application</span>
                         <h4 class="mb-3">
                             <span class="counter-value"
-                                data-target="{{$qualify_programmes->count()}}">({{$qualify_programmes->count() }})</span>
+                                data-target="{{$closed_programmes}}">({{$closed_programmes }})</span>
+
                         </h4>
                     </div>
                 </div>
                 <div class="text-nowrap">
-                    <span class="ms-1 text-muted font-size-13">Courses Available for application </span>
+                    <span class="ms-1 text-muted font-size-13">All Closed for application. </span>
                 </div>
             </div><!-- end card body -->
         </div><!-- end card -->
@@ -125,20 +126,63 @@ Dashboard
             </div>
         </div>
     </div>
-    <!-- end page title -->
 
     <div class="row align-items-center">
         <div class="col-md-6">
             <div class="mb-3">
-                <h5 class="card-title">Course Available: <span
-                        class="text-muted fw-normal ms-2">({{$qualify_programmes->count()}})</span></h5>
+                <h5 class="card-title">Recent Added Programmes Available: <span
+                        class="text-muted fw-normal ms-2">({{$total_programme}})</span></h5>
             </div>
         </div>
 
 
     </div>
     <!-- end row -->
+    <div class="row">
+        @foreach ($recent_programmes as $recent_programme)
+        <div class="col-xl-3 col-sm-6">
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <div class="dropdown text-end">
+                        <span class="bg-danger badge me-2">#{{ $recent_programme->code }}</span>
+                    </div>
+
+                    <div class="mx-auto mb-4">
+                        <img src="{{ url('storage/'.$recent_programme->portfolio->logo) }}" alt=""
+                            class="avatar-xl rounded-circle img-thumbnail">
+                    </div>
+                    <h5 class="font-size-16 mb-1"><a href="#" class="text-body">{{ $recent_programme->name }}</a></h5>
+                    <p class="text-muted mb-2">{{ $recent_programme->portfolio->university_name }}</p>
+                    <p class="text-muted mb-2">{{ $recent_programme->min_entry_requirements }}</p>
+                    <p class="text-muted mb-2">Closing Date: <span
+                            class="bg-warning badge me-2">{{ $recent_programme->closing_date}}</span> </p>
+                    <p class="text-muted mb-2">Points:<span
+                            class="bg-success badge me-2">{{$recent_programme->min_points}}</span>|| Entry Term:
+                        <span class="bg-success badge me-2">{{$recent_programme->entry_term}}</span> || Duration:
+                        <span class="bg-success badge me-2">{{$recent_programme->course_duration}}</span></p>
+
+
+                </div>
+
+                <div class="btn-group" role="group">
+                    <a href="{{ route('my-programmes.show',$recent_programme->id) }}"
+                        class="btn btn-outline-light btn-success text-white"><i class="uil uil-user me-1"></i>
+                        View</a>
+
+
+                </div>
+            </div>
+            <!-- end card -->
+        </div>
+        @endforeach
+        <!-- end col -->
+    </div>
+
+
 </div>
+
+
 
 
 @endsection

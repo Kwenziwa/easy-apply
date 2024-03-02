@@ -135,16 +135,7 @@ Profile
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                             @enderror
                         </div>
-                        <div class="mb-3">
-                            <label for="is_email_verified" class="form-label">Is Email Verified?</label>
-                            <select class="form-select" required>
-                                <option value="0" @selected($user->is_email_verified =='0' )>No</option>
-                                <option value="1" @selected($user->is_email_verified =='1' )>Yes</option>
-                            </select>
-                            @error('is_email_verified')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                            @enderror
-                        </div>
+                       
 
                         @if($user->type == 'university')
                         <div>

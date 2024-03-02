@@ -1,18 +1,19 @@
 @extends('layouts.master')
 
 @section('title')
-Users
+Programmes
 @endsection
 
 @section('content')
 @component('components.breadcrumb')
 @slot('li_1')
-Users
+Programmes
 @endslot
 @slot('title')
-Users
+Programmes
 @endslot
 @endcomponent
+
 
 <div class="row">
 
@@ -21,16 +22,16 @@ Users
         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
             <div class="row">
                 <div class="card-header">
-                    <h4 class="card-title">All Users </h4>
+                    <h4 class="card-title">All Programmes </h4>
                     <p class="card-title-desc">
-                        All Users in the system
+                        All Programmes in the system
                     </p>
-                    <a href="{{ route('users.create') }}" class="btn btn-primary" style="float: right;">Add
-                        User</a>
+                    <!-- Create Button -->
+                    <a href="{{ route('my-programmes.create') }}" class="btn btn-primary" style="float: right;">Add
+                        Programmes</a>
                 </div>
                 <div class="col-sm-12">
 
-                    <br />
                     <table class="table align-middle datatable dt-responsive table-check nowrap dataTable no-footer"
                         style="border-collapse: collapse; border-spacing: 0px 8px; width: 100%;" id="DataTables_Table_0"
                         aria-describedby="DataTables_Table_0_info">
@@ -38,27 +39,24 @@ Users
                             <tr>
                                 <th scope="col" class="sorting sorting_desc" tabindex="0"
                                     aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                    aria-label="ID: activate to sort column ascending" style="width: 10px;"
+                                    aria-label="ID: activate to sort column ascending" style="width: 22px;"
                                     aria-sort="descending">#</th>
                                 <th scope="col" class="sorting sorting_desc" tabindex="0"
                                     aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                    aria-label="Name: activate to sort column ascending" style="width: 122px;"
-                                    aria-sort="descending">Full Name</th>
+                                    aria-label="Prigramme Name: activate to sort column ascending" style="width: 122px;"
+                                    aria-sort="descending">Programme Name</th>
                                 <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                    rowspan="1" colspan="1" aria-label="University: activate to sort column
-                                    ascending" style="width: 10px;">Email </th>
-                                 <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                     rowspan="1" colspan="1" aria-label="University: activate to sort column
-                                    ascending" style="width: 10px;">Links </th>
+                                    rowspan="1" colspan="1" aria-label="Institution : activate to sort column
+                                    ascending" style="width: 125px;">Institution </th>
                                 <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                    rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending"
-                                    style="width: 10px;">Verified</th>
+                                    rowspan="1" colspan="1" aria-label="Code: activate to sort column ascending"
+                                    style="width: 153px;">Code</th>
                                 <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                    rowspan="1" colspan="1" aria-label="Website: activate to sort column ascending"
-                                    style="width: 10px;">Mobile Number</th>
+                                    rowspan="1" colspan="1" aria-label="closing_date: activate to sort column ascending"
+                                    style="width: 153px;">Closing Date</th>
                                 <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                     rowspan="1" colspan="1" aria-label="Mobile: activate to sort column ascending"
-                                    style="width: 10px;">Type</th>
+                                    style="width: 157px;">Minimum Points</th>
                                 <th style="width: 80px; min-width: 80px;" class="sorting" tabindex="0"
                                     aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
                                     aria-label="Action: activate to sort column ascending">Action</th>
@@ -66,52 +64,36 @@ Users
                         </thead>
                         <tbody>
 
-                            @foreach ($users as $user)
+                            @foreach ($programmes as $programme)
                             <tr class="odd">
-                                <th scope="row" class="">
-                                    {{$user->id}}
-                                </th>
-                                <td class="sorting_1">
-
-
-                                    <a href="{{ route('users.show', $user->id) }}"
-                                        class="text-body">{{ $user->fullname }}</a>
-                                </td>
-                                <td>{{ $user->email }}</td>
-                                <td> <a href="{{ route('users.edit',$user->id) }}"
-                                        class="btn btn-success btn-sm d-inline" title="Next Of Kin"><i
-                                            class="bx bx-group"></i></a>
-                                    <a href="{{ route('student-documents.show',$user->id) }}"
-                                        class="btn btn-warning btn-sm d-inline" title="Student Docs"><i
-                                            class="mdi mdi-file"></i></a></td>
-                                <td> @if(isset($user->email_verified_at))
-                                    <img src="{{ URL::asset('build/images/icons/check.png') }}" alt="">
-                                    @else
-                                    <img src="{{ URL::asset('build/images/icons/remove.png') }}" alt="">
-                                    @endif</td>
+                                <th scope="row">{{ $programme->id }}</th>
+                                <td>{{ $programme->name }}</td>
                                 <td>
-                                    {{ $user->phone_number }}
-                                </td>
-                                <td>{{ customBadge($user->type) }}</td>
-
-                                <td>
-
-                                    <form id="delete-form-{{ $user->id }}"
-                                        action="{{ route('users.destroy', $user->id) }}" method="POST">
-                                        <a href="{{ route('users.edit',$user->id) }}"
+                                    <img src="{{ url('storage/'.$programme->portfolio->logo) }} " alt=""
+                                        class="avatar-sm rounded-circle me-2">
+                                    {{ $programme->portfolio->university_name }}</td>
+                                <td>{{ $programme->code }}</td>
+                                <td>{{ $programme->closing_date }}</td>
+                                <td>{{ $programme->min_points }}</td>
+                                <td class="text-right">
+                                    <form id="delete-form-{{ $programme->id }}"
+                                        action="{{ route('my-programmes.destroy', $programme->id) }}" method="POST">
+                                        <a href="{{ route('my-programmes.edit',[$programme->id]) }}"
                                             class="btn btn-warning btn-sm d-inline" title="Edit Action"><i
                                                 class="bx bx-pencil"></i></a>
-                                        <a href="{{ route('users.show',$user->id) }}"
+                                        <a href="{{ route('my-programmes.show',$programme->id) }}"
                                             class="btn btn-warning btn-sm d-inline" title="Edit View"><i
                                                 class="mdi mdi-eye"></i></a>
+
+
                                         @csrf {{-- CSRF token for security --}}
                                         @method('DELETE') {{-- Method spoofing to send a DELETE request --}}
                                         <button type="button" class="btn btn-danger btn-block btn-sm d-inline"
-                                            onclick="confirmDelete({{ $user->id }})" title="Delete Action"><i
+                                            onclick="confirmDelete({{ $programme->id }})" title="Delete Action"><i
                                                 class="mdi mdi-delete"></i></button>
                                     </form>
-
                                 </td>
+
                             </tr>
                             @endforeach
 
@@ -129,8 +111,6 @@ Users
 @section('script')
 <!-- SweetAlert2 CDN -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
 <script>
     function confirmDelete(subjectId) {
         Swal.fire({

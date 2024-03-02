@@ -121,8 +121,9 @@ class UserProfileController extends Controller
 
         $portfolio = Portfolio::where('user_id', $user->id)->first();
 
-        $data_university = $validator_portfolio->validated();
+
         if ($request->type == 'university') {
+            $data_university = $validator_portfolio->validated();
             //use the method in the trait
             if ($request->file('logo') != null) {
                 $data_university['logo'] = $request->file('logo')->store('university_logo', 'public');

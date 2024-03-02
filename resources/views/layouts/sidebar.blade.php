@@ -76,7 +76,7 @@
                         <span data-key="t-subjects">Programmes</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ route('next-of-kin.index') }}">
                         <i data-feather="users"></i>
                         <span data-key="t-next-of-kin">Next Of Kin</span>
@@ -87,7 +87,7 @@
                         <i data-feather="file-plus"></i>
                         <span data-key="t-file-tex">Docs</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <!-- Sidebar -->
@@ -107,24 +107,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('subjects') }}">
+                    <a href="{{ route('my-programmes.index') }}">
                         <i data-feather="file-text"></i>
-                        <span data-key="t-subjects">Subjects</span>
+                        <span data-key="t-subjects">Programmes</span>
                     </a>
                 </li>
 
-                <li>
-                    <a href="{{ route('next-of-kin.index') }}">
-                        <i data-feather="users"></i>
-                        <span data-key="t-next-of-kin">Next Of Kin</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('my-documents.index') }}">
-                        <i data-feather="file-plus"></i>
-                        <span data-key="t-file-tex">Docs</span>
-                    </a>
-                </li>
             </ul>
         </div>
         <!-- Sidebar -->

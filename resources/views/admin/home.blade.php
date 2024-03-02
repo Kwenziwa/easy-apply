@@ -22,10 +22,77 @@ Dashboard
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-6">
+                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Students</span>
+                        <h4 class="mb-3">
+                            <span class="counter-value"
+                                data-target="{{ $count_data['students_counter'] ?? '0'}}">{{ $count_data['students_counter'] ?? '0'}}</span>
+                        </h4>
+                    </div>
+
+                    <div class="col-6">
+                        <div id="mini-chart1" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                    </div>
+                </div>
+                <div class="text-nowrap">
+                    <span class="ms-1 text-muted font-size-13">All Students</span>
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+
+    <div class="col-xl-3 col-md-6">
+        <!-- card -->
+        <div class="card card-h-100">
+            <!-- card body -->
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Universities</span>
+                        <h4 class="mb-3">
+                            <span class="counter-value"
+                                data-target="{{ $count_data['university_counter']?? '0'}}">{{ $count_data['university_counter']?? '0'}}</span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="text-nowrap">
+                    <span class="ms-1 text-muted font-size-13">All universities.</span>
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+
+    <div class="col-xl-3 col-md-6">
+        <!-- card -->
+        <div class="card card-h-100">
+            <!-- card body -->
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Programmes</span>
+                        <h4 class="mb-3">
+                            <span class="counter-value"
+                                data-target="{{ $count_data['program_count']?? '0'}}">{{ $count_data['program_count']?? '0'}}</span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="text-nowrap">
+                    <span class="ms-1 text-muted font-size-13">All programmes </span>
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+
+    <div class="col-xl-3 col-md-6">
+        <!-- card -->
+        <div class="card card-h-100">
+            <!-- card body -->
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-6">
                         <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Subjects</span>
                         <h4 class="mb-3">
                             <span class="counter-value"
-                                data-target="{{ $userWithSubjectsCount->subjects_count ?? '0'}}">{{ $userWithSubjectsCount->subjects_count ?? '0'}}</span>
+                                data-target="{{ $count_data['subject_count']?? '0'}}">{{ $count_data['subject_count']?? '0'}}</span>
                         </h4>
                     </div>
 
@@ -34,72 +101,7 @@ Dashboard
                     </div>
                 </div>
                 <div class="text-nowrap">
-                    <span class="ms-1 text-muted font-size-13">All subjects</span>
-                </div>
-            </div><!-- end card body -->
-        </div><!-- end card -->
-    </div><!-- end col -->
-
-    <div class="col-xl-3 col-md-6">
-        <!-- card -->
-        <div class="card card-h-100">
-            <!-- card body -->
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-6">
-                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Points</span>
-                        <h4 class="mb-3">
-                            <span class="counter-value"
-                                data-target="{{ $userWithLevelSum->level_sum ?? '0'}}">{{ $userWithLevelSum->level_sum ?? '0'}}</span>
-                        </h4>
-                    </div>
-                </div>
-                <div class="text-nowrap">
-                    <span class="ms-1 text-muted font-size-13">All your points excluding LO.</span>
-                </div>
-            </div><!-- end card body -->
-        </div><!-- end card -->
-    </div><!-- end col -->
-
-    <div class="col-xl-3 col-md-6">
-        <!-- card -->
-        <div class="card card-h-100">
-            <!-- card body -->
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-6">
-                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Available Courses</span>
-                        <h4 class="mb-3">
-                            <span class="counter-value" data-target="0">0</span>
-                        </h4>
-                    </div>
-                </div>
-                <div class="text-nowrap">
-                    <span class="ms-1 text-muted font-size-13">Courses Available for application </span>
-                </div>
-            </div><!-- end card body -->
-        </div><!-- end card -->
-    </div><!-- end col -->
-
-    <div class="col-xl-3 col-md-6">
-        <!-- card -->
-        <div class="card card-h-100">
-            <!-- card body -->
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-6">
-                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Notifications</span>
-                        <h4 class="mb-3">
-                            <span class="counter-value" data-target="0">0</span>
-                        </h4>
-                    </div>
-
-                    <div class="col-6">
-                        <div id="mini-chart1" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
-                    </div>
-                </div>
-                <div class="text-nowrap">
-                    <span class="ms-1 text-muted font-size-13">System Notifications</span>
+                    <span class="ms-1 text-muted font-size-13">All subjects </span>
                 </div>
             </div><!-- end card body -->
         </div><!-- end card -->
@@ -140,74 +142,142 @@ Dashboard
     <div class="row">
         <div class="col-xl-3 col-sm-6">
             <div class="card text-center">
-                <div class="card-body">
-                    <div class="dropdown text-end">
-                        <a class="text-muted dropdown-toggle font-size-16" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true">
-                            <i class="bx bx-dots-horizontal-rounded"></i>
-                        </a>
-                    </div>
-
-                    <div class="mx-auto mb-4">
-                        <img src="assets/images/users/avatar-2.jpg" alt=""
-                            class="avatar-xl rounded-circle img-thumbnail">
-                    </div>
-                    <h5 class="font-size-16 mb-1"><a href="#" class="text-body">Phyllis Gatlin</a></h5>
-                    <p class="text-muted mb-2">Full Stack Developer</p>
-
-                </div>
-
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i>
-                        Profile</button>
-                    <button type="button" class="btn btn-outline-light text-truncate"><i
-                            class="uil uil-envelope-alt me-1"></i> Message</button>
-
-                </div>
+                <canvas id="userChart" width="400" height="400"></canvas>
             </div>
             <!-- end card -->
         </div>
         <!-- end col -->
-    </div>
-    <!-- end row -->
 
-    <div class="row g-0 align-items-center mb-4">
-        <div class="col-sm-6">
-            <div>
-                <p class="mb-sm-0">Showing 1 to 10 of 57 entries</p>
+        <div class="col-xl-3 col-sm-6">
+            <div class="card text-center">
+                <canvas id="userTypeChart" width="400" height="400"></canvas>
+
             </div>
+            <!-- end card -->
         </div>
-        <div class="col-sm-6">
-            <div class="float-sm-end">
-                <ul class="pagination mb-sm-0">
-                    <li class="page-item disabled">
-                        <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link">1</a>
-                    </li>
-                    <li class="page-item active">
-                        <a href="#" class="page-link">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
-                    </li>
-                </ul>
+
+        <div class="col-xl-3 col-sm-6">
+            <div class="card text-center">
+                <canvas id="closingDateChart" width="400" height="400"></canvas>
+
+
             </div>
+            <!-- end card -->
         </div>
     </div>
     <!-- end row -->
 
 </div>
+
+
+@endsection
+
+@section('script')
+
+<script>
+    var ctx = document.getElementById('userChart').getContext('2d');
+    var userChart = new Chart(ctx, {
+        type: 'line', // or 'bar', 'pie', etc.
+        data: {
+            labels: @json($months),
+            datasets: [{
+                label: 'Users per Month',
+                data: @json($counts),
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+</script>
+
+<script>
+    var ctx = document.getElementById('userTypeChart').getContext('2d');
+    var userTypeChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: @json($types),
+            datasets: [{
+                label: 'User Types',
+                data: @json($type_counts),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'User Types Distribution'
+                }
+            }
+        },
+    });
+
+</script>
+
+<script>
+    var ctx = document.getElementById('closingDateChart').getContext('2d');
+    var closingDateChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Closed Application', 'Open Application'],
+            datasets: [{
+                label: 'Closing Dates',
+                data: [@json($beforeNow), @json($afterNow)],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Distribution of Closing Dates'
+                }
+            }
+        },
+    });
+
+</script>
 
 
 @endsection

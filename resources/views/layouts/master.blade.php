@@ -11,6 +11,10 @@
     <link rel="shortcut icon" href="{{ URL::asset('build/images/favicon.ico') }}">
 
     @include('layouts.head-css')
+    <!-- pace js -->
+    <script src="{{ URL::asset('build/libs/chart.js/chart.umd.js') }}"></script>
+    <!-- chartjs init -->
+    <script src="{{ URL::asset('build/js/pages/chartjs.init.js') }}"></script>
 </head>
 
 <body class="pace-done" data-bs-theme="{{ $theme === 'dark' ? 'dark' : 'light' }}"
